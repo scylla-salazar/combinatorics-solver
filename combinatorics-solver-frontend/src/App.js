@@ -1,25 +1,42 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import ProblemSelection from './components/ProblemSelection';
+import InputForm from './components/InputForm';
+import ResultDisplay from './components/ResultDisplay';
 
 function App() {
+  const [selectedProblem, setSelectedProblem] = useState('');
+  const [result, setResult] = useState(null);
+
+  const handleSelectProblem = (problem) => {
+    setSelectedProblem(problem);
+    setResult(null); // Clear previous result when a new problem is selected
+  };
+
+  const handleSubmit = async (formData) => {
+    try {
+      const response = await fetch(`http://localhost:5000/${selectedProblem}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+      const data = await response.json();
+      setResult(data);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>Combinatorics Solver</h1>
+      <ProblemSelection onSelectProblem={handleSelectProblem} />
+      <InputForm problem={selectedProblem} onSubmit={handleSubmit} />
+      <ResultDisplay result={result} />
     </div>
   );
 }
 
 export default App;
+
