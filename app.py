@@ -6,12 +6,14 @@ from functools import wraps
 from itertools import permutations
 import math
 from flask_cors import CORS
-CORS(app)
 
 # Load environment variables from .env
 load_dotenv()
 
 app = Flask(__name__)
+
+#Enable CORS for all routes
+CORS(app)
 
 # Set a Flask secret key
 app.secret_key = os.urandom(24)  # Generates a random 24-byte secret key
