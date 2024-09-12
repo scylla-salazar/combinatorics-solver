@@ -5,6 +5,8 @@ from dotenv import load_dotenv
 from functools import wraps
 from itertools import permutations
 import math
+from flask_cors import CORS
+CORS(app)
 
 # Load environment variables from .env
 load_dotenv()
