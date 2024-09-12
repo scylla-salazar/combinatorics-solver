@@ -20,7 +20,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build -b gh-pages"
+    "deploy": "gh-pages -d build -r https://github.com/scylla-salazar/combinatorics-solver.git -b gh-pages"
   },
   "homepage": "https://scylla-salazar.github.io/combinatorics-solver/combinatorics-solver-frontend",
   "eslintConfig": {
