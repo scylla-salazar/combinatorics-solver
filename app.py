@@ -3,6 +3,8 @@ from flask import Flask, jsonify, request, redirect, url_for, session
 from authlib.integrations.flask_client import OAuth
 from dotenv import load_dotenv
 from functools import wraps
+from itertools import permutations
+import math
 
 # Load environment variables from .env
 load_dotenv()
@@ -56,13 +58,13 @@ def requires_auth(f):
 
 # Combinatorics Problem Routes
 
+# Traveling Salesman Problem (TSP)
 @app.route('/tsp', methods=['POST'])
 @requires_auth
 def solve_tsp():
-    cities = request.json['cities']
-    # Simple implementation of the TSP algorithm using a brute-force method
-    from itertools import permutations
-    import math
+    cities = request.json.get('cities')
+    if not cities:
+        return jsonify({"error": "Cities data is missing"}), 400
 
     def calculate_distance(route):
         return sum(math.dist(cities[route[i]], cities[route[i + 1]]) for i in range(len(route) - 1)) + math.dist(cities[route[-1]], cities[route[0]])
@@ -70,11 +72,15 @@ def solve_tsp():
     best_route = min(permutations(range(len(cities))), key=calculate_distance)
     return jsonify({"best_route": best_route})
 
+# Knapsack Problem
 @app.route('/knapsack', methods=['POST'])
 @requires_auth
 def solve_knapsack():
-    items = request.json['items']
-    capacity = request.json['capacity']
+    items = request.json.get('items')
+    capacity = request.json.get('capacity')
+    
+    if not items or capacity is None:
+        return jsonify({"error": "Items or capacity data is missing"}), 400
     
     # Implementing the Knapsack problem using dynamic programming
     n = len(items)
@@ -89,10 +95,14 @@ def solve_knapsack():
     
     return jsonify({"max_value": dp[n][capacity]})
 
+# Graph Coloring Problem
 @app.route('/graph_coloring', methods=['POST'])
 @requires_auth
 def solve_graph_coloring():
-    graph = request.json['graph']
+    graph = request.json.get('graph')
+    
+    if not graph:
+        return jsonify({"error": "Graph data is missing"}), 400
     
     # Graph coloring using a greedy algorithm
     color_result = {}
@@ -105,10 +115,14 @@ def solve_graph_coloring():
     
     return jsonify({"color_assignment": color_result})
 
+# Hamiltonian Cycle Problem
 @app.route('/hamiltonian_cycle', methods=['POST'])
 @requires_auth
 def solve_hamiltonian_cycle():
-    graph = request.json['graph']
+    graph = request.json.get('graph')
+
+    if not graph:
+        return jsonify({"error": "Graph data is missing"}), 400
 
     # Hamiltonian cycle using a backtracking approach
     n = len(graph)
@@ -138,11 +152,15 @@ def solve_hamiltonian_cycle():
     else:
         return jsonify({"message": "No Hamiltonian cycle found"})
 
+# Bin Packing Problem
 @app.route('/bin_packing', methods=['POST'])
 @requires_auth
 def solve_bin_packing():
-    items = request.json['items']
-    bin_capacity = request.json['bin_capacity']
+    items = request.json.get('items')
+    bin_capacity = request.json.get('bin_capacity')
+
+    if not items or not bin_capacity:
+        return jsonify({"error": "Items or bin capacity data is missing"}), 400
 
     # First-Fit Decreasing algorithm for bin packing
     items.sort(reverse=True)
@@ -160,10 +178,14 @@ def solve_bin_packing():
 
     return jsonify({"bins": bins})
 
+# Partitions Problem
 @app.route('/partitions', methods=['POST'])
 @requires_auth
 def solve_partitions():
-    number = request.json['number']
+    number = request.json.get('number')
+
+    if number is None:
+        return jsonify({"error": "Number data is missing"}), 400
 
     # Partition algorithm using dynamic programming
     partition_counts = [1] + [0] * number
@@ -176,3 +198,4 @@ def solve_partitions():
 
 if __name__ == '__main__':
     app.run(debug=True)
+
