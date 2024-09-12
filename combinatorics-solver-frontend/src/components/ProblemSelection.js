@@ -1,21 +1,33 @@
 import React from 'react';
 
-const ProblemSelection = ({ onSelectProblem }) => {
+const problems = [
+  { value: 'tsp', label: 'Traveling Salesman Problem' },
+  { value: 'knapsack', label: 'Knapsack Problem' },
+  { value: 'graph-coloring', label: 'Graph Coloring Problem' },
+  { value: 'hamiltonian-cycle', label: 'Hamiltonian Cycle Problem' },
+  { value: 'bin-packing', label: 'Bin Packing Problem' },
+  { value: 'partitions', label: 'Partitions Problem' },
+];
+
+function ProblemSelection({ onSelectProblem }) {
+  const handleChange = (e) => {
+    onSelectProblem(e.target.value);
+  };
+
   return (
     <div>
-      <h3>Select a Problem</h3>
-      <select onChange={(e) => onSelectProblem(e.target.value)}>
-        <option value="">--Select a Problem--</option>
-        <option value="tsp">Traveling Salesman Problem</option>
-        <option value="knapsack">Knapsack Problem</option>
-        <option value="graph_coloring">Graph Coloring Problem</option>
-        <option value="hamiltonian_cycle">Hamiltonian Cycle Problem</option>
-        <option value="bin_packing">Bin Packing Problem</option>
-        <option value="partitions">Partitions Problem</option>
+      <h2>Select a problem</h2>
+      <select onChange={handleChange}>
+        <option value="">-- Select Problem --</option>
+        {problems.map((problem) => (
+          <option key={problem.value} value={problem.value}>
+            {problem.label}
+          </option>
+        ))}
       </select>
     </div>
   );
-};
+}
 
 export default ProblemSelection;
 

@@ -1,13 +1,13 @@
 import React from 'react';
 
-const ResultDisplay = ({ result }) => {
+function ResultDisplay({ result }) {
   return (
     <div>
-      <h3>Result</h3>
-      {result ? <pre>{JSON.stringify(result, null, 2)}</pre> : <p>No result yet.</p>}
+      <h2>Result</h2>
+      <pre>{JSON.stringify(result, null, 2)}</pre>
     </div>
   );
-};
+}
 
 export default ResultDisplay;
 

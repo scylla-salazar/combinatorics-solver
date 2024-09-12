@@ -1,47 +1,28 @@
-import React, { useState } from 'react';
+import React from 'react';
+import TSPComponent from './TSPComponent';
+import KnapsackComponent from './KnapsackComponent';
+import GraphColoringComponent from './GraphColoringComponent';
+import HamiltonianCycleComponent from './HamiltonianCycleComponent';
+import PartitionsComponent from './PartitionsComponent';
+import BinPackingComponent from './BinPackingComponent';
 
-const InputForm = ({ problem, onSubmit }) => {
-  const [formData, setFormData] = useState({});
-
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+function InputForm({ problem, onSubmit }) {
+  const handleSubmit = (data) => {
+    onSubmit(data);
   };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    onSubmit(formData);
-  };
-
-  if (!problem) return <p>Please select a problem.</p>;
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h3>Input for {problem}</h3>
-
-      {/* Render inputs based on the selected problem */}
-      {problem === 'tsp' && (
-        <>
-          <label>Cities (in coordinates):</label>
-          <input type="text" name="cities" onChange={handleChange} />
-        </>
-      )}
-      {problem === 'knapsack' && (
-        <>
-          <label>Items (weights & values):</label>
-          <input type="text" name="items" onChange={handleChange} />
-          <label>Capacity:</label>
-          <input type="text" name="capacity" onChange={handleChange} />
-        </>
-      )}
-      {/* Add similar inputs for other problems here */}
-
-      <button type="submit">Submit</button>
-    </form>
+    <div>
+      <h2>Input Form</h2>
+      {problem === 'tsp' && <TSPComponent onSubmit={handleSubmit} />}
+      {problem === 'knapsack' && <KnapsackComponent onSubmit={handleSubmit} />}
+      {problem === 'graph-coloring' && <GraphColoringComponent onSubmit={handleSubmit} />}
+      {problem === 'hamiltonian-cycle' && <HamiltonianCycleComponent onSubmit={handleSubmit} />}
+      {problem === 'bin-packing' && <BinPackingComponent onSubmit={handleSubmit} />}
+      {problem === 'partitions' && <PartitionsComponent onSubmit={handleSubmit} />}
+    </div>
   );
-};
+}
 
 export default InputForm;
 

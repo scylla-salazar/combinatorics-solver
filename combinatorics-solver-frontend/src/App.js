@@ -32,8 +32,8 @@ function App() {
     <div>
       <h1>Combinatorics Solver</h1>
       <ProblemSelection onSelectProblem={handleSelectProblem} />
-      <InputForm problem={selectedProblem} onSubmit={handleSubmit} />
-      <ResultDisplay result={result} />
+      {selectedProblem && <InputForm problem={selectedProblem} onSubmit={handleSubmit} />}
+      {result && <ResultDisplay result={result} />}
     </div>
   );
 }
