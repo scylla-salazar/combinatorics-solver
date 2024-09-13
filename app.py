@@ -13,7 +13,8 @@ load_dotenv()
 app = Flask(__name__)
 
 #Enable CORS for all routes
-CORS(app)
+CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})
+
 
 # Set a Flask secret key
 app.secret_key = os.urandom(24)  # Generates a random 24-byte secret key
@@ -37,7 +38,7 @@ auth0 = oauth.register(
 def login():
     return auth0.authorize_redirect(redirect_uri=url_for('callback', _external=True))
 
-# Callback Route
+# Callback Route 
 @app.route('/callback')
 def callback():
     auth0.authorize_access_token()
@@ -64,7 +65,7 @@ def requires_auth(f):
 
 # Traveling Salesman Problem (TSP)
 @app.route('/tsp', methods=['POST'])
-@requires_auth
+# @requires_auth
 def solve_tsp():
     cities = request.json.get('cities')
     if not cities:
@@ -78,7 +79,7 @@ def solve_tsp():
 
 # Knapsack Problem
 @app.route('/knapsack', methods=['POST'])
-@requires_auth
+# @requires_auth
 def solve_knapsack():
     items = request.json.get('items')
     capacity = request.json.get('capacity')
@@ -101,7 +102,7 @@ def solve_knapsack():
 
 # Graph Coloring Problem
 @app.route('/graph_coloring', methods=['POST'])
-@requires_auth
+# @requires_auth
 def solve_graph_coloring():
     graph = request.json.get('graph')
     
@@ -121,7 +122,7 @@ def solve_graph_coloring():
 
 # Hamiltonian Cycle Problem
 @app.route('/hamiltonian_cycle', methods=['POST'])
-@requires_auth
+# @requires_auth
 def solve_hamiltonian_cycle():
     graph = request.json.get('graph')
 
@@ -158,7 +159,7 @@ def solve_hamiltonian_cycle():
 
 # Bin Packing Problem
 @app.route('/bin_packing', methods=['POST'])
-@requires_auth
+# @requires_auth
 def solve_bin_packing():
     items = request.json.get('items')
     bin_capacity = request.json.get('bin_capacity')
@@ -184,7 +185,7 @@ def solve_bin_packing():
 
 # Partitions Problem
 @app.route('/partitions', methods=['POST'])
-@requires_auth
+# @requires_auth
 def solve_partitions():
     number = request.json.get('number')
 
