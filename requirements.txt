@@ -15,12 +15,14 @@ ecdsa==0.19.0
 Flask==3.0.3
 Flask-Cors==5.0.0
 frozenlist==1.4.1
+gunicorn==23.0.0
 idna==3.8
 importlib_metadata==8.4.0
 itsdangerous==2.2.0
 Jinja2==3.1.4
 MarkupSafe==2.1.5
 multidict==6.1.0
+packaging==24.1
 pyasn1==0.6.1
 pycparser==2.22
 PyJWT==2.9.0
