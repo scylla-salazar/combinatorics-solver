@@ -33,6 +33,23 @@ auth0 = oauth.register(
     },
 )
 
+@app.route('/')
+def index():
+    return jsonify({
+        "message": "Welcome to the Combinatorics Solver API!",
+        "available_endpoints": [
+            "/login",
+            "/callback",
+            "/logout",
+            "/tsp",
+            "/knapsack",
+            "/graph_coloring",
+            "/hamiltonian_cycle",
+            "/bin_packing",
+            "/partitions"
+        ]
+    })
+
 # Login Route
 @app.route('/login')
 def login():
@@ -202,5 +219,5 @@ def solve_partitions():
     return jsonify({"partition_count": partition_counts[number]})
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host='0.0.0.0')
 
