@@ -14,7 +14,7 @@ function App() {
 
   const handleSubmit = async (formData) => {
     try {
-      const response = await fetch(`http://localhost:5000/${selectedProblem}`, {
+      const response = await fetch(`https://combinatorics-solver.onrender.com/${selectedProblem}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
