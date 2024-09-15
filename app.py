@@ -13,7 +13,7 @@ load_dotenv()
 app = Flask(__name__)
 
 #Enable CORS for all routes
-CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})
+CORS(app) # Allow all domains to access this API
 
 
 # Set a Flask secret key
