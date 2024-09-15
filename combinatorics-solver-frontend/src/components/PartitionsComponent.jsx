@@ -7,7 +7,7 @@ const PartitionsComponent = () => {
 
   const handleSubmit = async () => {
     try {
-      const response = await axios.post('/partitions', { number: parseInt(number) });
+      const response = await axios.post('https://combinatorics-solver.onrender.com/partitions', { number: parseInt(number) });
       console.log('Partitions:', response.data.partitions);
     } catch (error) {
       console.error('Error solving Partitions problem', error);
