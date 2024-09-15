@@ -14,7 +14,7 @@ const BinPackingComponent = () => {
 
   const handleSubmit = async () => {
     try {
-      const response = await axios.post('/bin_packing', { items, bin_capacity: parseFloat(binCapacity) });
+      const response = await axios.post('https://combinatorics-solver.onrender.com/bin_packing', { items, bin_capacity: parseFloat(binCapacity) });
       console.log('Bins:', response.data.bins);
     } catch (error) {
       console.error('Error solving Bin Packing problem', error);
