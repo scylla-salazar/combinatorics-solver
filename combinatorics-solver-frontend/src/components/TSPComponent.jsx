@@ -24,7 +24,7 @@ const TSPComponent = () => {
   const handleSubmit = async () => {
     const formattedCities = cities.map(city => [parseFloat(city.x), parseFloat(city.y)]);
     try {
-      const response = await axios.post('/tsp', { cities: formattedCities });
+      const response = await axios.post('https://combinatorics-solver.onrender.com/tsp', { cities: formattedCities });
       console.log('Best Route:', response.data.best_route);
     } catch (error) {
       console.error('Error solving TSP', error);
