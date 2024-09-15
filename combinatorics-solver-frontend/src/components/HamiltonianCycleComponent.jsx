@@ -13,7 +13,7 @@ const HamiltonianCycleComponent = () => {
 
   const handleSubmit = async () => {
     try {
-      const response = await axios.post('/hamiltonian_cycle', { graph: matrix });
+      const response = await axios.post('https://combinatorics-solver.onrender.com/hamiltonian_cycle', { graph: matrix });
       console.log('Cycle:', response.data.cycle);
     } catch (error) {
       console.error('Error solving Hamiltonian Cycle problem', error);
