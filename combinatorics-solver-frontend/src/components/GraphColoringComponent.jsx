@@ -15,7 +15,7 @@ const GraphColoringComponent = () => {
 
   const handleSubmit = async () => {
     try {
-      const response = await axios.post('/graph_coloring', { graph });
+      const response = await axios.post('https://combinatorics-solver.onrender.com/graph_coloring', { graph });
       console.log('Color Assignment:', response.data.color_assignment);
     } catch (error) {
       console.error('Error solving Graph Coloring problem', error);
