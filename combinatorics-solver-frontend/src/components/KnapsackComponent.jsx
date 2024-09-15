@@ -28,7 +28,7 @@ const KnapsackComponent = () => {
       value: parseFloat(item.value)
     }));
     try {
-      const response = await axios.post('/knapsack', { items: formattedItems, capacity: parseFloat(capacity) });
+      const response = await axios.post('https://combinatorics-solver.onrender.com/knapsack', { items: formattedItems, capacity: parseFloat(capacity) });
       console.log('Max Value:', response.data.max_value);
     } catch (error) {
       console.error('Error solving Knapsack problem', error);
